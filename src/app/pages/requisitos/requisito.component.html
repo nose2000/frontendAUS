@@ -1,0 +1,29 @@
+<div class="row animated fadeIn">
+
+    <div class="col-md-6">
+        <div class="card card-body">
+            <h3 class="box-title m-b-0">Requisito: {{requisito.requisito}}</h3>
+
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarRequisito(f)">
+                        <div class="form-group">
+                            <label>Nombre del Requisito</label>
+                            <input [(ngModel)]="requisito.requisito" name="requisito" type="text" class="form-control" placeholder="Nombre del Requisito" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                            <i class="fa fa-save"></i>
+                            Guardar
+                         </button>
+
+                        <a routerLink="/requisitos" class="btn btn-inverse waves-effect waves-light">
+                          Cancel
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
