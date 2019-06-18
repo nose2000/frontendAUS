@@ -9,7 +9,8 @@ import {
   SharedService,
   PersonaService,
   LogingGuardGuard,
-  RequisitoService
+  RequisitoService,
+  SubirArchivoService
 } from './service.index';
 
 
@@ -20,7 +21,8 @@ import {
     SharedService,
     PersonaService,
     LogingGuardGuard,
-    RequisitoService
+    RequisitoService,
+    SubirArchivoService
   ],
   imports: [
     CommonModule,

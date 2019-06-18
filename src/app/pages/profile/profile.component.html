@@ -5,7 +5,7 @@
             <div class="card-body">
 
                 <h4 class="card-title">Perfil del Usuario</h4>
-                <h6 class="card-subtitle">{{persona.nombrePer}}</h6>
+                <h6 class="card-subtitle">{{persona.nombrePer}} {{persona.apPaternoPer}} {{persona.apMaternoPer}}</h6>
 
                 <form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f.value)" class="form p-t-20">
 
@@ -15,7 +15,7 @@
                             <div class="input-group-addon">
                                 <i class="ti-user"></i>
                             </div>
-                            <input [ngModel]="persona.nombrePer" name="nombre" type="text" class="form-control" placeholder="Nombre de Usuario" required>
+                            <input [ngModel]="persona.nombrePer" name="nombrePer" type="text" class="form-control" placeholder="Nombre de Usuario" required>
                         </div>
                     </div>
 
@@ -25,7 +25,7 @@
                             <div class="input-group-addon">
                                 <i class="ti-user"></i>
                             </div>
-                            <input [ngModel]="persona.apPaternoPer" name="apPaterno" type="text" class="form-control" placeholder="Apellido Paterno" required>
+                            <input [ngModel]="persona.apPaternoPer" name="apPaternoPer" type="text" class="form-control" placeholder="Apellido Paterno" required>
                         </div>
                     </div>
 
@@ -35,7 +35,7 @@
                             <div class="input-group-addon">
                                 <i class="ti-user"></i>
                             </div>
-                            <input [ngModel]="persona.apMaternoPer" name="apMaterno" type="text" class="form-control" placeholder="Apellido Materno" required>
+                            <input [ngModel]="persona.apMaternoPer" name="apMaternoPer" type="text" class="form-control" placeholder="Apellido Materno" required>
                         </div>
                     </div>
 
@@ -47,7 +47,7 @@
                             <div class="input-group-addon">
                                 <i class="ti-mobile"></i>
                             </div>
-                            <input [ngModel]="persona.telefonoPer" name="telefono" type="text" class="form-control" placeholder="Telefono" required>
+                            <input [ngModel]="persona.telefonoPer" name="telefonoPer" type="number" class="form-control" placeholder="Telefono" required>
                         </div>
                     </div>
 
@@ -61,7 +61,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                    <button type="submit" class="btn btn-block btn-success waves-effect waves-light m-r-10">
                       <i class="fa fa-save"></i>
                       Guardar
                     </button>
@@ -75,24 +75,24 @@
 
     <div class="col-lg-5">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body" align="center">
 
                 <h4 class="card-title">Fotografia del Usuario</h4>
-                <h6 class="card-subtitle">nombre usuario</h6>
+                <h6 class="card-subtitle">{{persona.nombrePer}} {{persona.apPaternoPer}}</h6>
 
                 <!-- pre visualizacion de la imagen -->
-                <!-- <img *ngIf="!imagenTemp" [src]=" usuario.img | imagen" class="w150">
-                <img *ngIf="imagenTemp" [src]=" imagenTemp " class="w150"> -->
+                <img *ngIf="!imagenTemp" [src]=" persona.img | imagen" class="w150">
+                <img *ngIf="imagenTemp" [src]=" imagenTemp " class="w150">
 
                 <!-- seleccionar la imagen -->
-                <!-- <input (change)="seleccionImagen( $event.target.files[0] )" type="file"> -->
+                <input (change)="seleccionImagen( $event.target.files[0] )" type="file">
 
                 <br> <br>
 
-                <!-- <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="button" class="btn btn-block btn-success waves-effect waves-light m-r-10">
+                <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="button" class="btn btn-block btn-success waves-effect waves-light m-r-10">
                     <i class="fa fa-save"></i>
                     Actualizar Foto
-                </button> -->
+                </button>
 
             </div>
         </div>

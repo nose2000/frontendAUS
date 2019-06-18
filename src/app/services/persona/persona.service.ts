@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 
 import { Persona } from '../../models/persona.model';
+import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 
 import { map,  catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -23,7 +24,8 @@ export class PersonaService {
 
   constructor(
     public http: HttpClient,
-    public router: Router
+    public router: Router,
+    public _subirArchivoService: SubirArchivoService
     ) {
       this.cargarStorage();
     }
@@ -106,18 +108,38 @@ export class PersonaService {
 
   actualizarPersona(persona: Persona) {
 
-    console.log(persona);
-
     let url = URL_SERVICIOS + '/persona/' + persona._id;
     url += '?token=' + this.token;
 
-    //console.log( url);
+    return this.http.put( url, persona)
+            .pipe(
+              map( ( resp: any) => {
 
-    return this.http.put( url, persona);
+                let personaDB: Persona = resp.persona;
+
+                this.guardarStorage( personaDB._id, this.token, personaDB);
+                Swal.fire('Usuario actualizado', persona.nombrePer, 'success');
+
+                return true;
+              }));
   }
 
 
+  cambiarImagen( archivo: File, id: string) {
 
+    this._subirArchivoService.subirArchivo( archivo, 'personas', id )
+          .then( (resp: any) => {
+
+            this.persona.img = resp.persona.img;
+            Swal.fire( 'Imagen Actulaizada', this.persona.nombrePer, 'success');
+
+            this.guardarStorage( id, this.token, this.persona);
+          })
+          .catch( resp => {
+            console.log(resp);
+          });
+
+  }
 
 
 
