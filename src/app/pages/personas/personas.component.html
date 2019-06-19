@@ -1,0 +1,99 @@
+<!-- busqueda -->
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscarPersona(input.value)" type="text" class="form-control" placeholder="Buscar">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- cargango o buscando -->
+<div class="row animated fadeIn" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<!-- tabla -->
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <!-- total usuarios -->
+                <h3 class="card-title"> Usuarios Registrados ( <small>{{totalRegistros}}</small> )</h3>
+
+                <!-- tabla usaurios -->
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="textSize">
+                            <th>Imagen</th>
+                            <th>Correo</th>
+                            <th>Nombre</th>
+                            <th>Ap. Paterno</th>
+                            <th>Ap. Materno</th>
+                            <th>DNI</th>
+                            <th>Telefono</th>
+                            <th class="text-center">Rol</th>
+                            <th>Fecha Inicio</th>
+                            <th>Fecha Inicio</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let persona of personas" class="textSize">
+                            <td class="w70">
+                                <img [src]="persona.img | imagen" class="img-50 img-circle pointer">
+                            </td>
+                            <td>{{persona.email}}</td>
+                            <td>{{persona.nombrePer}}</td>
+                            <td>{{persona.apPaternoPer}}</td>
+                            <td>{{persona.apMaternoPer}}</td>
+                            <td>{{persona.DNIPer}}</td>
+                            <td>{{persona.telefonoPer}}</td>
+                            <!-- <td>{{persona.rol}}</td> -->
+                            <td>
+                                <select [(ngModel)]="persona.rol" name="rol" class="form-control text">
+                                  <option value="ADMINISTRADOR" >ADMINISTRADOR</option>
+                                  <option value="OPERARIO">OPERARIO</option>
+                              </select>
+                            </td>
+                            <th>Fecha Inicio</th>
+                            <th>Fecha Inicio</th>
+                            <td>
+                                <button class="btn btn-primary">
+                                  <i class="fa fa-edit"></i>
+                                </button>
+
+                                <button (click)="decativarPersona(persona)" class="btn btn-danger">
+                                  <i class="fa fa-trash-o"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- paginacion -->
+                <button (click)="cambiarDesde(-10)" class="btn btn-secondary">
+                Anterior
+              </button>
+
+                <button (click)="cambiarDesde(10)" class="btn btn-secondary">
+                Siguiente
+              </button>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -17,6 +17,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { ProfileComponent } from './profile/profile.component';
 import { RequisitosComponent } from './requisitos/requisitos.component';
 import { RequisitoComponent } from './requisitos/requisito.component';
+import { PersonasComponent } from './personas/personas.component';
 
 
 
@@ -27,7 +28,8 @@ import { RequisitoComponent } from './requisitos/requisito.component';
         DashboardComponent,
         ProfileComponent,
         RequisitosComponent,
-        RequisitoComponent
+        RequisitoComponent,
+        PersonasComponent
     ],
     exports: [
         DashboardComponent,

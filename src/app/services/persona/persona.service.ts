@@ -115,9 +115,14 @@ export class PersonaService {
             .pipe(
               map( ( resp: any) => {
 
-                let personaDB: Persona = resp.persona;
+                if ( persona._id === this.persona._id) {
 
-                this.guardarStorage( personaDB._id, this.token, personaDB);
+                  let personaDB: Persona = resp.persona;
+
+                  this.guardarStorage( personaDB._id, this.token, personaDB);
+
+                }
+
                 Swal.fire('Usuario actualizado', persona.nombrePer, 'success');
 
                 return true;
@@ -141,7 +146,38 @@ export class PersonaService {
 
   }
 
+  cargarPersonas(desde: number = 0 ) {
 
+    let url = URL_SERVICIOS + '/persona?desde=' + desde;
+
+    return this.http.get(url);
+
+  }
+
+
+  buscarPersonas(termino: string) {
+
+    let url = URL_SERVICIOS + '/busqueda/colleccion/personas/' + termino;
+
+    return this.http.get(url)
+              .pipe(
+                map( (resp: any) => resp.personas));
+
+  }
+
+  desactivarPersona(persona: Persona) {
+
+    let url = URL_SERVICIOS + '/persona/delete/' + persona._id;
+    url += '?token=' + this.token;
+
+    return this.http.put( url, persona)
+            .pipe(
+              map( (resp: any) => {
+                Swal.fire('Usuario Desactivado', persona.nombrePer , 'success');
+                return resp;
+              }));
+
+  }
 
 
 }
